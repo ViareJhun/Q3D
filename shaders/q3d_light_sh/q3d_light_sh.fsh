@@ -21,7 +21,7 @@ vec3 unpack(float value) {
 		floor(value / 10000.0) / 100.0,
 	    mod(floor(value / 100.0), 100.0) / 100.0,
 	    mod(value, 100.0) / 100.0
-	)
+	);
 }
 
 void main()
@@ -33,14 +33,14 @@ void main()
 	// Shading
 	if (is_shading == 1.0) {
 		// Prepare
-		float is_norm = (is_normal == 1.0);
+		bool is_norm = (is_normal == 1.0);
 		vec3 norm = normalize(v_vNormal);
 		vec3 light = vec3(0.0);
 		
 		// Global
 		if (global_light[0] == 1.0 && is_norm) {
 			// Prepare
-			vec3 global_color = unpack(global_light[4]);
+			vec3 global_color = vec3(1.0); //unpack(global_light[4]);
 			
 			vec3 global_dir = -vec3(
 				global_light[1],
@@ -53,7 +53,7 @@ void main()
 			
 			// Diffuse
 			light += (
-				max(dot(norm, global_dir), 0.0) *
+				max(dot(norm, normalize(global_dir)), 0.0) *
 				global_color * m_diffuse
 			);
 			
@@ -61,27 +61,28 @@ void main()
 			vec3 view_dir = normalize(view_pos - v_vPosition);
 			vec3 reflect_dir = reflect(-global_dir, norm);  
 			light += (
-				pow(max(dot(view_dir, reflect_dir), 0.0), m_shininess) *
+				pow(max(dot(view_dir, reflect_dir), 0.0), 1.0 * m_shininess) *
 				global_color * m_specular
 			);
 		}
 		
 		// Point
+		/*
 		for (int i = 0; i < 16; i ++) {
 			// Prepare
-			float idx = i * 6;
+			int idx = i * 6;
 			vec3 light_pos = vec3(
-				light_data[i + 0],
-				light_data[i + 1],
-				light_data[i + 2]
+				light_data[idx + 0],
+				light_data[idx + 1],
+				light_data[idx + 2]
 			);
-			vec3 light_color = unpack(light_data[i + 3]);
-			float linear = light_data[i + 4];
-			float quadratic = light_data[i + 5];
+			vec3 light_color = vec3(1.0); //unpack(light_data[idx + 3]);
+			float linear = light_data[idx + 4];
+			float quadratic = light_data[idx + 5];
 			vec3 light_dir = normalize(light_pos - v_vPosition);
 			
 			// Distance factor
-			vec3 dist = length(light_pos - v_vPosition);
+			float dist = length(light_pos - v_vPosition);
 			float factor = 1.0 / (
 				1.0 + linear * dist + 
     		    quadratic * dist * dist
@@ -109,7 +110,7 @@ void main()
 				light += light_color * factor;
 			}
 		}
-		
+		*/
 		// Flashlight
 		
 		// Finish

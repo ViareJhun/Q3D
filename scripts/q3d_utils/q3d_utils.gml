@@ -27,3 +27,7 @@ function qcol2f(color) {
 		(floor(colour_get_blue(color) / 256) * 100) * 10000
 	)
 }
+
+function qstex(sprite, index = 0) {
+	return sprite_get_texture(sprite, index)
+}

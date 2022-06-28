@@ -5,6 +5,7 @@ enum cam_shader {
 	light
 }
 
+#region base
 function q3D_cam_init(
 	z = 0,
 	fov = 65,
@@ -37,8 +38,12 @@ function q3D_cam_init(
 	
 	self.q_temp_proj = undefined
 	self.q_temp_view = undefined
+	
+	self.q_pass = cam_shader.pass
 }
+#endregion
 
+#region update camera
 function q3D_cam_fly(_speed) {
 	if keyboard_check(ord("W")) {
 		self.x += self.q_xto * _speed
@@ -50,6 +55,20 @@ function q3D_cam_fly(_speed) {
 		self.x -= self.q_xto * _speed
 		self.y -= self.q_yto * _speed
 		self.z -= self.q_zto * _speed
+	}
+	
+	if keyboard_check(ord("A")) {
+		var a = self.q_azimut + 90;
+		
+		self.x += dcos(a) * _speed
+		self.y -= dsin(a) * _speed
+	}
+	
+	if keyboard_check(ord("D")) {
+		var a = self.q_azimut - 90;
+		
+		self.x += dcos(a) * _speed
+		self.y -= dsin(a) * _speed
 	}
 }
 
@@ -79,7 +98,9 @@ function q3D_cam_view(debug) {
 		self.q_zto = dcos(self.q_zenit)
 	}
 }
+#endregion
 
+#region camera set
 function q3D_cam_set(aspect, pass = cam_shader.pass) {
 	var cam = camera_get_active();
 	
@@ -122,9 +143,13 @@ function q3D_cam_set(aspect, pass = cam_shader.pass) {
 		break
 		
 		case cam_shader.light:
-			q3D_light_set()
+			q3D_light_set(
+				self.x, self.y, self.z
+			)
 		break
 	}
+	
+	self.q_pass = pass
 }
 
 function q3D_cam_reset() {
@@ -141,10 +166,19 @@ function q3D_cam_reset() {
 	
 	camera_apply(cam)
 	
-	shader_reset()
+	switch self.q_pass {
+		case cam_shader.pass:
+			shader_reset()
+		break
+		
+		case cam_shader.light:
+			q3D_light_reset()
+		break
+	}
 }
+#endregion
 
-
+#region other
 function q3D_view_set(w, h, scale = 1) {
 	view_enabled = true
 	view_visible[0] = true
@@ -168,3 +202,4 @@ function q3D_view_set(w, h, scale = 1) {
 		)
 	}
 }
+#endregion

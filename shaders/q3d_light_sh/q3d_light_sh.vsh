@@ -19,6 +19,6 @@ void main()
 	v_vPosition = (gm_Matrices[MATRIX_WORLD] * ndc).xyz;
 	v_vNormal = (
 		gm_Matrices[MATRIX_WORLD] *
-		vec4(in_Position.x, in_Position.y, in_Position.z, 0.0)
+		vec4(in_Normal.x, in_Normal.y, in_Normal.z, 0.0)
 	).xyz;
 }
