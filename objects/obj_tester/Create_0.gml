@@ -10,6 +10,17 @@ my_floor = vb_floor(
 	room_width / 32, room_height / 32
 )
 
+fx = 1
+fy = 0
+fz = 0
+fp = 0
+fe = 0
+
+gp = 0
+ge = 0
+
+debug = 0
+
 q3D_cam_init(16)
 q3D_view_set(512, 288, 2)
 
@@ -26,3 +37,5 @@ with obj_block_map {
 	)
 }
 vb_end(mdl_block, true)
+
+application_surface_draw_enable(false)

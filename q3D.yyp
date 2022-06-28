@@ -5,6 +5,7 @@
     {"id":{"name":"q3D_utils","path":"scripts/q3D_utils/q3D_utils.yy",},"order":4,},
     {"id":{"name":"obj_tester","path":"objects/obj_tester/obj_tester.yy",},"order":0,},
     {"id":{"name":"q3D_light","path":"scripts/q3D_light/q3D_light.yy",},"order":5,},
+    {"id":{"name":"sh_dith","path":"shaders/sh_dith/sh_dith.yy",},"order":2,},
     {"id":{"name":"q3D_camera","path":"scripts/q3D_camera/q3D_camera.yy",},"order":0,},
     {"id":{"name":"q3D_math","path":"scripts/q3D_math/q3D_math.yy",},"order":2,},
     {"id":{"name":"tex_floor_test","path":"sprites/tex_floor_test/tex_floor_test.yy",},"order":1,},

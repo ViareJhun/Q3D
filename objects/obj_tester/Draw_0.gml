@@ -1,12 +1,25 @@
 /// @description draw all
 
-q3D_light_ambient(0.1)
-// q3D_light_global(0.2, -0.5, -0.2, -0.5, c_white)
-// q3D_light_point(0, x, y, z, c_white)
+q3D_light_ambient(0.5)
+q3D_light_global(
+	gp,
+	dcos(current_time * 0.1),
+	-dsin(current_time * 0.1),
+	-0.5,
+	c_white
+)
+for (var i = 0; i < 16; i ++) {
+	q3D_light_point(
+		i,
+		64 + i div 4 * 64,
+		64 + i mod 4 * 64,
+		8, make_color_hsv(i / 16 * 255, 255, 255)
+	)
+}
 q3D_light_flash(
-	0.5,
+	fp,
 	x, y, z,
-	q_xto, q_yto, q_zto,
+	fx, fy, fz,
 	c_white, 128
 )
 
