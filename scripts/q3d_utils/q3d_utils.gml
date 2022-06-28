@@ -21,11 +21,9 @@ function qsh_fa(shader, name, array) {
 }
 
 function qcol2f(color) {
-	return (
-		(floor(colour_get_red(color) / 256) * 100) +
-		(floor(colour_get_green(color) / 256) * 100) * 100 +
-		(floor(colour_get_blue(color) / 256) * 100) * 10000
-	)
+	return floor(color_get_red(color) / 256 * 100) +
+		floor(color_get_green(color) / 256 * 100) * 100 +
+		floor(color_get_blue(color) / 256 * 100) * 10000
 }
 
 function qstex(sprite, index = 0) {

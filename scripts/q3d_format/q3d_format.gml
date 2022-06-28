@@ -32,7 +32,7 @@ function vb_add_vertex(vb, x, y, z, nx, ny, nz, u, v, color, alpha) {
 	vertex_texcoord(vb, u, v)
 }
 
-function vb_add_wall(vb, _x, _y, _z, x2, y2, z2, hr, vr) {
+function vb_add_wall(vb, _x, _y, _z, x2, y2, z2, hr, vr, n_factor = 1) {
 	var normal;
 	var nx;
 	var ny;
@@ -43,9 +43,9 @@ function vb_add_wall(vb, _x, _y, _z, x2, y2, z2, hr, vr) {
 	    x2, y2, z2,
 	    x2, y2, _z
 	);
-	nx = normal[0];
-	ny = normal[1];
-	nz = normal[2];
+	nx = normal[0] * n_factor;
+	ny = normal[1] * n_factor;
+	nz = normal[2] * n_factor;
 	vb_add_vertex( vb, _x, _y, _z, nx, ny, nz, 0, 0, c_white, 1 );
 	vb_add_vertex( vb, x2, y2, z2, nx, ny, nz, hr, vr, c_white, 1 );
 	vb_add_vertex( vb, x2, y2, _z, nx, ny, nz, hr, 0, c_white, 1 );
@@ -55,9 +55,9 @@ function vb_add_wall(vb, _x, _y, _z, x2, y2, z2, hr, vr) {
 	    _x, _y, z2,
 	    x2, y2, z2
 	);
-	nx = normal[0];
-	ny = normal[1];
-	nz = normal[2];
+	nx = normal[0] * n_factor;
+	ny = normal[1] * n_factor;
+	nz = normal[2] * n_factor;
 	vb_add_vertex( vb, _x, _y, _z, nx, ny, nz, 0, 0, c_white, 1 );
 	vb_add_vertex( vb, _x, _y, z2, nx, ny, nz, 0, vr, c_white, 1 );
 	vb_add_vertex( vb, x2, y2, z2, nx, ny, nz, hr, vr, c_white, 1 );
@@ -93,10 +93,10 @@ function vb_add_block(vb, _x, _y, _z, w, d, h, hr, vr) {
 	vb_add_vertex( vb, _x + w, _y + d, _z + h, 0, 0, 1, hr, vr, c_white, 1 );
 
 	// walls
-	vb_add_wall( vb, _x, _y, _z, _x, _y + d, _z + h, hr, vr )
-	vb_add_wall( vb, _x, _y + d, _z, _x + w, _y + d, _z + h, hr, vr )
-	vb_add_wall( vb, _x + w, _y + d, _z, _x + w, _y, _z + h, hr, vr )
-	vb_add_wall( vb, _x + w, _y, _z, _x, _y, _z + h, hr, vr )
+	vb_add_wall(vb, _x, _y, _z, _x, _y + d, _z + h, hr, vr)
+	vb_add_wall(vb, _x, _y + d, _z, _x + w, _y + d, _z + h, hr, vr)
+	vb_add_wall(vb, _x + w, _y + d, _z, _x + w, _y, _z + h, hr, vr)
+	vb_add_wall(vb, _x + w, _y, _z, _x, _y, _z + h, hr, vr)
 }
 
 function vb_floor(x, y, w, d, z, hr, vr, freeze = true) {

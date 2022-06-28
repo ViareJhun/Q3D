@@ -7,12 +7,12 @@ function q3D_light_init() {
 	global.light_ambient_default = 0
 	global.light_forward = q3D_light_sh
 	global.light_global = array_create(5)
-	global.light_flash = array_create(7)
+	global.light_flash = array_create(11)
 }
 #endregion
 
 #region light sources
-function q3D_light_point(index, x, y, z, color, lin = 0.045, quad = 0.0075) {
+function q3D_light_point(index, x, y, z, color, lin = 0.014, quad = 0.0007) {
 	var idx = index * 6;
 	
 	global.light_data[idx + 0] = x
@@ -29,6 +29,20 @@ function q3D_light_global(enable, x, y, z, color) {
 	global.light_global[2] = y
 	global.light_global[3] = z
 	global.light_global[4] = qcol2f(color)
+}
+
+function q3D_light_flash(enable, x, y, z, xto, yto, zto, color = c_white, dist = 128, angle = dcos(22), angle_out = dcos(33)) {
+	global.light_flash[0] = enable
+	global.light_flash[1] = x
+	global.light_flash[2] = y
+	global.light_flash[3] = z
+	global.light_flash[4] = xto
+	global.light_flash[5] = yto
+	global.light_flash[6] = zto
+	global.light_flash[7] = qcol2f(color)
+	global.light_flash[8] = angle
+	global.light_flash[9] = angle_out
+	global.light_flash[10] = dist
 }
 #endregion
 
@@ -55,8 +69,8 @@ function q3D_light_material(ambient, diffuse, specular, shininess) {
 function q3D_light_material_default() {
 	qsh_f(global.light_forward, "m_ambient", global.light_ambient_default)
 	qsh_f(global.light_forward, "m_diffuse", 1.0)
-	qsh_f(global.light_forward, "m_specular", 0.0)
-	qsh_f(global.light_forward, "m_shininess", 0.0)
+	qsh_f(global.light_forward, "m_specular", 1.0)
+	qsh_f(global.light_forward, "m_shininess", 32.0)
 }
 #endregion
 

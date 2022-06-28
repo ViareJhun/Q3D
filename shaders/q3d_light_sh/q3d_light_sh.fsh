@@ -4,7 +4,7 @@ varying vec3 v_vPosition;
 varying vec3 v_vNormal;
 
 uniform float light_data[96];
-uniform float flash_light[7];
+uniform float flash_light[11];
 uniform float global_light[5];
 uniform vec3 view_pos;
 
@@ -38,36 +38,36 @@ void main()
 		vec3 light = vec3(0.0);
 		
 		// Global
-		if (global_light[0] == 1.0 && is_norm) {
+		if (is_norm) {
 			// Prepare
-			vec3 global_color = vec3(1.0); //unpack(global_light[4]);
+			vec3 global_color = unpack(global_light[4]);
 			
 			vec3 global_dir = -vec3(
 				global_light[1],
 				global_light[2],
 				global_light[3]
 			);
+			global_dir = normalize(global_dir);
 			
 			// Ambient
-			light += global_color * m_ambient;
+			light += global_color * m_ambient * global_light[0];
 			
 			// Diffuse
 			light += (
-				max(dot(norm, normalize(global_dir)), 0.0) *
+				max(dot(norm, global_dir), 0.0) *
 				global_color * m_diffuse
-			);
+			) * global_light[0];
 			
 			// Specular
 			vec3 view_dir = normalize(view_pos - v_vPosition);
 			vec3 reflect_dir = reflect(-global_dir, norm);  
 			light += (
-				pow(max(dot(view_dir, reflect_dir), 0.0), 1.0 * m_shininess) *
+				pow(max(dot(view_dir, reflect_dir), 0.0), m_shininess) *
 				global_color * m_specular
-			);
+			) * global_light[0];
 		}
 		
 		// Point
-		/*
 		for (int i = 0; i < 16; i ++) {
 			// Prepare
 			int idx = i * 6;
@@ -76,16 +76,16 @@ void main()
 				light_data[idx + 1],
 				light_data[idx + 2]
 			);
-			vec3 light_color = vec3(1.0); //unpack(light_data[idx + 3]);
-			float linear = light_data[idx + 4];
-			float quadratic = light_data[idx + 5];
+			vec3 light_color = unpack(light_data[idx + 3]);
+			float line = light_data[idx + 4];
+			float quad = light_data[idx + 5];
 			vec3 light_dir = normalize(light_pos - v_vPosition);
 			
 			// Distance factor
-			float dist = length(light_pos - v_vPosition);
+			float d = length(light_pos - v_vPosition);
 			float factor = 1.0 / (
-				1.0 + linear * dist + 
-    		    quadratic * dist * dist
+				1.0 + line * d + 
+    		    quad * (d * d)
 			);
 			
 			if (is_norm) {
@@ -110,8 +110,48 @@ void main()
 				light += light_color * factor;
 			}
 		}
-		*/
+		
 		// Flashlight
+		// Prepare
+		float flash_factor = flash_light[0];
+		vec3 flash_pos = vec3(flash_light[1], flash_light[2], flash_light[3]);
+		vec3 flash_dir = vec3(flash_light[4], flash_light[5], flash_light[6]);
+		vec3 flash_color = unpack(flash_light[7]);
+		float flash_angle = flash_light[8];
+		float flash_angle_out = flash_light[9];
+		float flash_dist = flash_light[10];
+		
+		vec3 light_dir = normalize(flash_pos - v_vPosition);
+		float theta = dot(light_dir, normalize(-flash_dir));
+		float dist = length(flash_pos - v_vPosition);
+		
+		if (theta > flash_angle_out) {
+			float eps = flash_angle - flash_angle_out;
+			float intensity = clamp(
+				(theta - flash_angle_out) / eps, 0.0, 1.0
+			);
+			
+			float factor = (
+				1.0 - clamp(distance(v_vPosition, flash_pos) / flash_dist, 0.0, 1.0)
+			);
+			
+			// Ambient
+			light += flash_color * m_ambient * factor * intensity * flash_factor;
+			
+			// Diffuse
+			light += flash_color * (
+				max(dot(norm, light_dir), 0.0) *
+				flash_color * m_diffuse
+			) * factor * intensity * flash_factor;
+			
+			// Specular
+			vec3 view_dir = normalize(view_pos - v_vPosition);
+			vec3 reflect_dir = reflect(-light_dir, norm);  
+			light += (
+				pow(max(dot(view_dir, reflect_dir), 0.0), m_shininess) *
+				flash_color * m_specular
+			) * factor * intensity * flash_factor;
+		}
 		
 		// Finish
 		base.rgb *= light;
