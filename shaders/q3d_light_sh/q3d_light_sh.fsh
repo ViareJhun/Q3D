@@ -10,7 +10,7 @@ uniform vec3 view_pos;
 
 uniform float m_ambient;
 uniform float m_diffuse;
-uniform float m_specular;
+uniform sampler2D m_specular;
 uniform float m_shininess;
 
 uniform float is_shading;
@@ -35,6 +35,7 @@ void main()
 		// Prepare
 		bool is_norm = (is_normal == 1.0);
 		vec3 norm = normalize(v_vNormal);
+		vec3 m_spec = texture2D(m_specular, uv).rgb;
 		vec3 light = vec3(0.0);
 		
 		// Global
@@ -63,7 +64,7 @@ void main()
 			vec3 reflect_dir = reflect(-global_dir, norm);  
 			light += (
 				pow(max(dot(view_dir, reflect_dir), 0.0), m_shininess) *
-				global_color * m_specular
+				global_color * m_spec
 			) * global_light[0];
 		} else {
 			light += global_color * global_light[0];
@@ -105,7 +106,7 @@ void main()
 				vec3 reflect_dir = reflect(-light_dir, norm);  
 				light += (
 					pow(max(dot(view_dir, reflect_dir), 0.0), m_shininess) *
-					light_color * m_specular
+					light_color * m_spec
 				) * factor;
 			} else {
 				// Simple shading
@@ -151,7 +152,7 @@ void main()
 			vec3 reflect_dir = reflect(-light_dir, norm);  
 			light += (
 				pow(max(dot(view_dir, reflect_dir), 0.0), m_shininess) *
-				flash_color * m_specular
+				flash_color * m_spec
 			) * factor * intensity * flash_factor;
 		}
 		

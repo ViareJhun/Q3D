@@ -47,6 +47,10 @@ function q3D_light_flash(enable, x, y, z, xto, yto, zto, color = c_white, dist =
 #endregion
 
 #region light options
+function q3D_light_ambient_get() {
+	return global.light_ambient_default
+}
+
 function q3D_light_ambient(ambient) {
 	global.light_ambient_default = ambient
 }
@@ -59,18 +63,24 @@ function q3D_light_normal(normal) {
 	qsh_f(global.light_forward, "is_normal", normal)
 }
 
-function q3D_light_material(ambient, diffuse, specular, shininess) {
+function q3D_light_material(ambient, diffuse, shininess, specular) {
 	qsh_f(global.light_forward, "m_ambient", ambient)
 	qsh_f(global.light_forward, "m_diffuse", diffuse)
-	qsh_f(global.light_forward, "m_specular", specular)
 	qsh_f(global.light_forward, "m_shininess", shininess)
+	qsh_s(global.light_forward, "m_specular", specular)
 }
 
 function q3D_light_material_default() {
 	qsh_f(global.light_forward, "m_ambient", global.light_ambient_default)
 	qsh_f(global.light_forward, "m_diffuse", 1.0)
-	qsh_f(global.light_forward, "m_specular", 1.0)
-	qsh_f(global.light_forward, "m_shininess", 32.0)
+	qsh_f(global.light_forward, "m_shininess", 16.0)
+	qsh_s(global.light_forward, "m_specular", tex_q3D_spec)
+}
+
+function q3D_light_set_mat(material) {
+	q3D_light_material(
+		material[0], material[1], material[2], material[3]
+	)
 }
 #endregion
 

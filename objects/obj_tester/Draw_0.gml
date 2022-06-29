@@ -9,14 +9,6 @@ q3D_light_global(
 	-0.5,
 	c_white
 )
-for (var i = 0; i < 16; i ++) {
-	q3D_light_point(
-		i,
-		64 + i div 4 * 128,
-		64 + i mod 4 * 128,
-		8, light_colors[i mod 4] //make_color_hsv(i / 16 * 255, 255, 255)
-	)
-}
 q3D_light_flash(
 	fp,
 	x, y, z,
@@ -44,17 +36,24 @@ vb_fdraw(
 	qstex(tex_floor_test)
 )
 
-vb_fdraw(
-	mdl_block,
-	qstex(tex_block_test)
-)
-
 q3D_light_normal(false)
-bb_draw(
-	tex_billboard_test, 0,
-	256, 256, 0, 64, 64
-)
+for (var i = 0; i < palms_count; i ++) {
+	bb_draw(
+		tex_billboard_test, 0,
+		palms[i][0], palms[i][1],
+		0,
+		64, 64
+	)
+}
 q3D_light_normal(true)
+
+q3D_light_set_mat(box_material)
+vb_draw(
+	mdl_block,
+	qstex(tex_box_diffuse)
+)
+q3D_light_material_default()
+
 
 // Opacity
 draw_set_alpha(0)

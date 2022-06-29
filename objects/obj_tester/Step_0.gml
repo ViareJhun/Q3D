@@ -1,61 +1,66 @@
 /// @description update
 
 // Motion
-var _moving = false;
-
-if keyboard_check(ord("W")) {
-	q3D_phys_impulse(0.5, self.q_azimut_s)
-	_moving = true
-}
-if keyboard_check(ord("S")) {
-	q3D_phys_impulse(0.5, self.q_azimut_s + 180)
-	_moving = true
-}
-if keyboard_check(ord("A")) {
-	q3D_phys_impulse(0.5, self.q_azimut_s - 90)
-	_moving = true
-}
-if keyboard_check(ord("D")) {
-	q3D_phys_impulse(0.5, self.q_azimut_s + 90)
-	_moving = true
-}
-
-if (_moving) {
-	z_pitch = lerp(
-		z_pitch,
-		dcos(current_time * 1.0) * 1.5,
-		0.1
-	)
+if debug {
+	q3D_cam_fly(4)
+	self.q_z = self.z - 8
 } else {
-	z_pitch = lerp(
-		z_pitch,
-		0,
-		0.1
-	)
-}
+	var _moving = false;
 
-var on_ground = q3D_phys_collision(0, 0, -1, obj_block_map);
-if (self.q_z <= 0) {
-	self.q_z = 0
-	self.q_speed[2] = 0
-	
-	on_ground = true
-} else {
-	if !on_ground self.q_speed[2] -= z_gravity
-}
-
-if (on_ground) {
-	self.q_speed[2] = 0
-	
-	if keyboard_check(vk_space) {
-		self.q_speed[2] = z_jump
+	if keyboard_check(ord("W")) {
+		q3D_phys_impulse(0.5, self.q_azimut_s)
+		_moving = true
 	}
-} else {
-	z_pitch = 0
-}
+	if keyboard_check(ord("S")) {
+		q3D_phys_impulse(0.5, self.q_azimut_s + 180)
+		_moving = true
+	}
+	if keyboard_check(ord("A")) {
+		q3D_phys_impulse(0.5, self.q_azimut_s - 90)
+		_moving = true
+	}
+	if keyboard_check(ord("D")) {
+		q3D_phys_impulse(0.5, self.q_azimut_s + 90)
+		_moving = true
+	}
 
-q3D_phys_endstep(obj_block_map)
-q3D_cam_phys_set(10)
+	if (_moving) {
+		z_pitch = lerp(
+			z_pitch,
+			dcos(current_time * 1.0) * 1.5,
+			0.1
+		)
+	} else {
+		z_pitch = lerp(
+			z_pitch,
+			0,
+			0.1
+		)
+	}
+
+	var on_ground = q3D_phys_collision(0, 0, -1, obj_block_map);
+	if (self.q_z <= 0) {
+		self.q_z = 0
+		self.q_speed[2] = 0
+	
+		on_ground = true
+	} else {
+		if !on_ground self.q_speed[2] -= z_gravity
+	}
+
+	if (on_ground) {
+		self.q_speed[2] = 0
+	
+		if keyboard_check(vk_space) {
+			self.q_speed[2] = z_jump
+		}
+	} else {
+		z_pitch = 0
+	}
+
+	q3D_phys_endstep(obj_block_map)
+	q3D_cam_phys_set(10)
+}
 
 q3D_cam_view(true)
 

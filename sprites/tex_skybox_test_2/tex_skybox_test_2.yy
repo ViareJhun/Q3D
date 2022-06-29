@@ -24,12 +24,12 @@
   "gridX": 0,
   "gridY": 0,
   "frames": [
-    {"compositeImage":{"FrameId":{"name":"6e6c690f-d130-4c99-9717-766a75c9a098","path":"sprites/tex_skybox_test/tex_skybox_test.yy",},"LayerId":null,"resourceVersion":"1.0","name":"","tags":[],"resourceType":"GMSpriteBitmap",},"images":[
-        {"FrameId":{"name":"6e6c690f-d130-4c99-9717-766a75c9a098","path":"sprites/tex_skybox_test/tex_skybox_test.yy",},"LayerId":{"name":"ffdc6c65-e325-4b4e-bc18-6f50a59cbe0a","path":"sprites/tex_skybox_test/tex_skybox_test.yy",},"resourceVersion":"1.0","name":"","tags":[],"resourceType":"GMSpriteBitmap",},
-      ],"parent":{"name":"tex_skybox_test","path":"sprites/tex_skybox_test/tex_skybox_test.yy",},"resourceVersion":"1.0","name":"6e6c690f-d130-4c99-9717-766a75c9a098","tags":[],"resourceType":"GMSpriteFrame",},
+    {"compositeImage":{"FrameId":{"name":"f3ff6c89-6826-4f46-869f-6118c4e0a9d7","path":"sprites/tex_skybox_test_2/tex_skybox_test_2.yy",},"LayerId":null,"resourceVersion":"1.0","name":"","tags":[],"resourceType":"GMSpriteBitmap",},"images":[
+        {"FrameId":{"name":"f3ff6c89-6826-4f46-869f-6118c4e0a9d7","path":"sprites/tex_skybox_test_2/tex_skybox_test_2.yy",},"LayerId":{"name":"736c3a4d-ec31-428c-b58e-4440164badc8","path":"sprites/tex_skybox_test_2/tex_skybox_test_2.yy",},"resourceVersion":"1.0","name":"","tags":[],"resourceType":"GMSpriteBitmap",},
+      ],"parent":{"name":"tex_skybox_test_2","path":"sprites/tex_skybox_test_2/tex_skybox_test_2.yy",},"resourceVersion":"1.0","name":"f3ff6c89-6826-4f46-869f-6118c4e0a9d7","tags":[],"resourceType":"GMSpriteFrame",},
   ],
   "sequence": {
-    "spriteId": {"name":"tex_skybox_test","path":"sprites/tex_skybox_test/tex_skybox_test.yy",},
+    "spriteId": {"name":"tex_skybox_test_2","path":"sprites/tex_skybox_test_2/tex_skybox_test_2.yy",},
     "timeUnits": 1,
     "playback": 1,
     "playbackSpeed": 30.0,
@@ -41,7 +41,7 @@
     "moments": {"Keyframes":[],"resourceVersion":"1.0","resourceType":"KeyframeStore<MomentsEventKeyframe>",},
     "tracks": [
       {"name":"frames","spriteId":null,"keyframes":{"Keyframes":[
-            {"id":"74b2b980-2994-4b8b-b723-98dbbc45fa85","Key":0.0,"Length":1.0,"Stretch":false,"Disabled":false,"IsCreationKey":false,"Channels":{"0":{"Id":{"name":"6e6c690f-d130-4c99-9717-766a75c9a098","path":"sprites/tex_skybox_test/tex_skybox_test.yy",},"resourceVersion":"1.0","resourceType":"SpriteFrameKeyframe",},},"resourceVersion":"1.0","resourceType":"Keyframe<SpriteFrameKeyframe>",},
+            {"id":"256d8e3e-f057-499d-a4fd-1f12fc3f2e03","Key":0.0,"Length":1.0,"Stretch":false,"Disabled":false,"IsCreationKey":false,"Channels":{"0":{"Id":{"name":"f3ff6c89-6826-4f46-869f-6118c4e0a9d7","path":"sprites/tex_skybox_test_2/tex_skybox_test_2.yy",},"resourceVersion":"1.0","resourceType":"SpriteFrameKeyframe",},},"resourceVersion":"1.0","resourceType":"Keyframe<SpriteFrameKeyframe>",},
           ],"resourceVersion":"1.0","resourceType":"KeyframeStore<SpriteFrameKeyframe>",},"trackColour":0,"inheritsTrackColour":true,"builtinName":0,"traits":0,"interpolation":1,"tracks":[],"events":[],"isCreationTrack":false,"resourceVersion":"1.0","tags":[],"resourceType":"GMSpriteFramesTrack","modifiers":[],},
     ],
     "visibleRange": null,
@@ -58,14 +58,14 @@
     "yorigin": 0,
     "eventToFunction": {},
     "eventStubScript": null,
-    "parent": {"name":"tex_skybox_test","path":"sprites/tex_skybox_test/tex_skybox_test.yy",},
+    "parent": {"name":"tex_skybox_test_2","path":"sprites/tex_skybox_test_2/tex_skybox_test_2.yy",},
     "resourceVersion": "1.4",
-    "name": "tex_skybox_test",
+    "name": "tex_skybox_test_2",
     "tags": [],
     "resourceType": "GMSequence",
   },
   "layers": [
-    {"visible":true,"isLocked":false,"blendMode":0,"opacity":100.0,"displayName":"default","resourceVersion":"1.0","name":"ffdc6c65-e325-4b4e-bc18-6f50a59cbe0a","tags":[],"resourceType":"GMImageLayer",},
+    {"visible":true,"isLocked":false,"blendMode":0,"opacity":100.0,"displayName":"default","resourceVersion":"1.0","name":"736c3a4d-ec31-428c-b58e-4440164badc8","tags":[],"resourceType":"GMImageLayer",},
   ],
   "nineSlice": null,
   "parent": {
@@ -73,7 +73,7 @@
     "path": "folders/Sprites/textures.yy",
   },
   "resourceVersion": "1.0",
-  "name": "tex_skybox_test",
+  "name": "tex_skybox_test_2",
   "tags": [],
   "resourceType": "GMSprite",
 }

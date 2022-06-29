@@ -20,6 +20,16 @@ function qsh_fa(shader, name, array) {
 	)
 }
 
+function qsh_s(shader, name, texture) {
+	texture_set_stage(
+		shader_get_sampler_index(
+			shader,
+			name
+		),
+		texture
+	)
+}
+
 function qcol2f(color) {
 	return floor(color_get_red(color) / 256 * 100) +
 		floor(color_get_green(color) / 256 * 100) * 100 +
