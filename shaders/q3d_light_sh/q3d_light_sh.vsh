@@ -8,10 +8,17 @@ varying vec4 v_vColour;
 varying vec3 v_vPosition;
 varying vec3 v_vNormal;
 
+uniform float is_quanted;
+uniform float vertex_quant;
+
 void main()
 {	
     vec4 ndc = vec4(in_Position, 1.0);
 	gl_Position = gm_Matrices[MATRIX_WORLD_VIEW_PROJECTION] * ndc;
+	
+	if (is_quanted == 1.0) {
+		gl_Position.xy = floor(gl_Position.xy / vertex_quant) * vertex_quant;
+	}
     
 	v_vColour = in_Colour;
     v_vTexcoord = in_TextureCoord;

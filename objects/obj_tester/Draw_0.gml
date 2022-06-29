@@ -30,6 +30,8 @@ vb_fdraw(
 	my_floor,
 	qstex(tex_floor_test)
 )
+
+// q3D_set_quanted(true)
 vb_fdraw(
 	mdl_block,
 	qstex(tex_block_test)
@@ -37,11 +39,11 @@ vb_fdraw(
 
 q3D_light_normal(false)
 bb_draw(
-	mdl_bb, qstex(tex_billboard_test),
-	256, 256, 32, self.q_azimut,
-	4, 4, 4
+	tex_billboard_test, 0,
+	256, 256, 0, 256, 256
 )
 q3D_light_normal(true)
+// q3D_set_quanted(false)
 
 gpu_set_texrepeat(false)
 q3D_cam_reset()

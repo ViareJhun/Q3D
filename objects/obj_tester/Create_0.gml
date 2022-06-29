@@ -24,6 +24,7 @@ debug = 0
 dith = false
 
 q3D_cam_init(16)
+q3D_cam_smooth(0.3)
 q3D_view_set(512, 288, 2)
 
 mdl_block = vb_create()
@@ -39,7 +40,5 @@ with obj_block_map {
 	)
 }
 vb_end(mdl_block, true)
-
-mdl_bb = vb_billboard(0, 0, 16, 16, 0, 1, -1, true, 0.5, 0.5)
 
 application_surface_draw_enable(false)

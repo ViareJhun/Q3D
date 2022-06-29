@@ -164,7 +164,7 @@ function vb_draw(
 	)
 }
 
-function bb_draw(
+function bb_draw_ext(
 	vb, tex,
 	x = 0, y = 0, z = 0,
 	azimut = 0,
@@ -188,6 +188,28 @@ function bb_draw(
 	matrix_set(
 		matrix_world,
 		_world
+	)
+}
+
+function bb_draw(sprite_index, subimg, x, y, z, w, h) {
+	matrix_set(
+		matrix_world,
+		matrix_build(
+			x, y, z,
+			0, 0, self.q_azimut_s,
+			w, w, h
+		)
+	)
+	
+	vertex_submit(
+		global.vb_base_billboard,
+		pr_trianglelist,
+		qstex(sprite_index, subimg)
+	)
+	
+	matrix_set(
+		matrix_world,
+		matrix_build_identity()
 	)
 }
 

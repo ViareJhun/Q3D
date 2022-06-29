@@ -25,10 +25,18 @@ function q3D_cam_init(
 	self.q_sens = sens
 	self.q_azimut = 0
 	self.q_zenit = 90
+	self.q_azimut_s = 0
+	self.q_zenit_s = 90
 	
 	self.q_xto = 1
 	self.q_yto = 0
 	self.q_zto = 0
+	
+	self.q_xto_s = 1
+	self.q_yto_s = 0
+	self.q_zto_s = 0
+	
+	self.q_smooth = 1.0
 	
 	self.q_xup = xup
 	self.q_yup = yup
@@ -46,26 +54,26 @@ function q3D_cam_init(
 #region update camera
 function q3D_cam_fly(_speed) {
 	if keyboard_check(ord("W")) {
-		self.x += self.q_xto * _speed
-		self.y += self.q_yto * _speed
-		self.z += self.q_zto * _speed
+		self.x += self.q_xto_s * _speed
+		self.y += self.q_yto_s * _speed
+		self.z += self.q_zto_s * _speed
 	}
 	
 	if keyboard_check(ord("S")) {
-		self.x -= self.q_xto * _speed
-		self.y -= self.q_yto * _speed
-		self.z -= self.q_zto * _speed
+		self.x -= self.q_xto_s * _speed
+		self.y -= self.q_yto_s * _speed
+		self.z -= self.q_zto_s * _speed
 	}
 	
 	if keyboard_check(ord("A")) {
-		var a = self.q_azimut + 90;
+		var a = self.q_azimut_s + 90;
 		
 		self.x += dcos(a) * _speed
 		self.y -= dsin(a) * _speed
 	}
 	
 	if keyboard_check(ord("D")) {
-		var a = self.q_azimut - 90;
+		var a = self.q_azimut_s - 90;
 		
 		self.x += dcos(a) * _speed
 		self.y -= dsin(a) * _speed
@@ -96,7 +104,18 @@ function q3D_cam_view(debug) {
 		self.q_xto = dcos(self.q_azimut) * -dsin(self.q_zenit)
 		self.q_yto = -dsin(self.q_azimut) * -dsin(self.q_zenit)
 		self.q_zto = dcos(self.q_zenit)
+		
+		self.q_azimut_s = lerp(self.q_azimut_s, self.q_azimut, self.q_smooth)
+		self.q_zenit_s = lerp(self.q_zenit_s, self.q_zenit, self.q_smooth)
+		
+		self.q_xto_s = dcos(self.q_azimut_s) * -dsin(self.q_zenit_s)
+		self.q_yto_s = -dsin(self.q_azimut_s) * -dsin(self.q_zenit_s)
+		self.q_zto_s = dcos(self.q_zenit_s)
 	}
+}
+
+function q3D_cam_smooth(smooth) {
+	self.q_smooth = smooth
 }
 #endregion
 
@@ -122,9 +141,9 @@ function q3D_cam_set(aspect, pass = cam_shader.pass) {
 			self.x,
 			self.y,
 			self.z,
-			self.x + self.q_xto,
-			self.y + self.q_yto,
-			self.z + self.q_zto,
+			self.x + self.q_xto_s,
+			self.y + self.q_yto_s,
+			self.z + self.q_zto_s,
 			self.q_xup,
 			self.q_yup,
 			self.q_zup
@@ -150,6 +169,7 @@ function q3D_cam_set(aspect, pass = cam_shader.pass) {
 			global.pass_shader = q3D_light_sh
 		break
 	}
+	q3D_set_quanted(false)
 	
 	self.q_pass = pass
 }
@@ -203,5 +223,10 @@ function q3D_view_set(w, h, scale = 1) {
 			view_hport[0]
 		)
 	}
+}
+
+function q3D_set_quanted(enable, quant = 1.0) {
+	qsh_f(global.pass_shader, "is_quanted", enable)
+	qsh_f(global.pass_shader, "vertex_quant", quant)
 }
 #endregion
