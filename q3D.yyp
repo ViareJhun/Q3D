@@ -1,5 +1,6 @@
 {
   "resources": [
+    {"id":{"name":"tex_billboard_test","path":"sprites/tex_billboard_test/tex_billboard_test.yy",},"order":2,},
     {"id":{"name":"q3D_pass_sh","path":"shaders/q3D_pass_sh/q3D_pass_sh.yy",},"order":0,},
     {"id":{"name":"q3D_init","path":"scripts/q3D_init/q3D_init.yy",},"order":3,},
     {"id":{"name":"q3D_utils","path":"scripts/q3D_utils/q3D_utils.yy",},"order":4,},

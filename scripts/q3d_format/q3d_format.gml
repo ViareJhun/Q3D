@@ -117,6 +117,23 @@ function vb_floor(x, y, w, d, z, hr, vr, freeze = true) {
 	
 	return _floor
 }
+
+function vb_billboard(_x, _y, w, d, z, hr, vr, freeze = true, xoffset = 0, yoffset = 0) {
+	var bb = vb_create();
+	
+	var y1 = _y - xoffset * w;
+	var y2 = _y - xoffset * w + w;
+	var z1 = z - yoffset * d;
+	var z2 = z - yoffset * d + d;
+	
+	vb_begin(bb)
+	vb_add_wall(bb, _x, y1, z1, _x, y2, z2, hr, vr)
+	vb_end(bb)
+	
+	if freeze vertex_freeze(bb)
+	
+	return bb
+}
 #endregion
 
 #region draw functions
@@ -133,6 +150,33 @@ function vb_draw(
 		matrix_build(
 			x, y, z,
 			xa, ya, za,
+			xs, ys, zs
+		)
+	)
+	
+	vertex_submit(
+		vb, pr_trianglelist, tex
+	)
+	
+	matrix_set(
+		matrix_world,
+		_world
+	)
+}
+
+function bb_draw(
+	vb, tex,
+	x = 0, y = 0, z = 0,
+	azimut = 0,
+	xs = 1, ys = 1, zs = 1
+) {
+	var _world = matrix_get(matrix_world);
+	
+	matrix_set(
+		matrix_world,
+		matrix_build(
+			x, y, z,
+			0, 0, azimut,
 			xs, ys, zs
 		)
 	)

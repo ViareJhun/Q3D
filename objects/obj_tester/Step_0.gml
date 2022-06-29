@@ -13,3 +13,4 @@ if mouse_check_button_pressed(mb_right) ge = !ge
 gp = lerp(gp, ge * 0.5, 0.1)
 
 if keyboard_check_pressed(vk_f1) debug = !debug
+if keyboard_check_pressed(ord("C")) dith = !dith

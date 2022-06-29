@@ -140,12 +140,14 @@ function q3D_cam_set(aspect, pass = cam_shader.pass) {
 	switch pass {
 		case cam_shader.pass:
 			shader_set(q3D_pass_sh)
+			global.pass_shader = q3D_pass_sh
 		break
 		
 		case cam_shader.light:
 			q3D_light_set(
 				self.x, self.y, self.z
 			)
+			global.pass_shader = q3D_light_sh
 		break
 	}
 	

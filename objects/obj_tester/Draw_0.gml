@@ -11,8 +11,8 @@ q3D_light_global(
 for (var i = 0; i < 16; i ++) {
 	q3D_light_point(
 		i,
-		64 + i div 4 * 64,
-		64 + i mod 4 * 64,
+		64 + i div 4 * 96,
+		64 + i mod 4 * 96,
 		8, make_color_hsv(i / 16 * 255, 255, 255)
 	)
 }
@@ -20,7 +20,7 @@ q3D_light_flash(
 	fp,
 	x, y, z,
 	fx, fy, fz,
-	c_white, 128
+	c_white, 256
 )
 
 q3D_cam_set(window_get_width() / window_get_height(), pass)
@@ -34,6 +34,14 @@ vb_fdraw(
 	mdl_block,
 	qstex(tex_block_test)
 )
+
+q3D_light_normal(false)
+bb_draw(
+	mdl_bb, qstex(tex_billboard_test),
+	256, 256, 32, self.q_azimut,
+	4, 4, 4
+)
+q3D_light_normal(true)
 
 gpu_set_texrepeat(false)
 q3D_cam_reset()

@@ -158,4 +158,7 @@ void main()
 	}
 	
     gl_FragColor = v_vColour * base;
+	if (gl_FragColor.a == 0.0) {
+		discard;
+	}
 }

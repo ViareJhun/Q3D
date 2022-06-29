@@ -8,8 +8,8 @@ varying vec4 color;
 
 void main()
 {
-    vec4 ndc = vec4( in_Position.x, in_Position.y, in_Position.z, 1.0);
-    gl_Position = gm_Matrices[MATRIX_WORLD_VIEW_PROJECTION] * ndc;
+    vec4 ndc = vec4(in_Position, 1.0);
+	gl_Position = gm_Matrices[MATRIX_WORLD_VIEW_PROJECTION] * ndc;
     
     color = in_Colour;
     uv = in_TextureCoord;
