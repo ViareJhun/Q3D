@@ -99,6 +99,61 @@ function vb_add_block(vb, _x, _y, _z, w, d, h, hr, vr) {
 	vb_add_wall(vb, _x + w, _y, _z, _x, _y, _z + h, hr, vr)
 }
 
+function vb_add_sphere(vb, steps, radius) {
+	for (var i = 0; i < steps - 0; i ++) {
+	    for (var j = 0; j < steps - 0; j ++) {
+	        var tx = i / steps;
+	        var ty = j / steps;
+	        var sx = 1 / steps;
+	        var sy = 1 / steps;
+	        var u = tx * 360;
+	        var v = ty * 180;
+	        var us = sx * 360;
+	        var vs = sy * 180;
+        
+	        var ax, ay, az;
+	        var bx, by, bz;
+	        var cx, cy, cz;
+	        var norm;
+	        var nx, ny, nz;
+        
+	        ax = q_sph_x(u, v, radius)
+	        ay = q_sph_y(u, v, radius)
+	        az = q_sph_z(u, v, radius)
+	        bx = q_sph_x(u + us, v + vs, radius)
+	        by = q_sph_y(u + us, v + vs, radius)
+	        bz = q_sph_z(u + us, v + vs, radius)
+	        cx = q_sph_x(u + us, v, radius)
+	        cy = q_sph_y(u + us, v, radius)
+	        cz = q_sph_z(u + us, v, radius)
+	        norm = q_normal_n(ax, ay, az, bx, by, bz, cx, cy, cz);
+	        nx = -norm[0]
+	        ny = -norm[1]
+	        nz = -norm[2]
+	        vb_add_vertex(vb, ax, ay, az, nx, ny, nz, tx, ty, c_white, 1)
+	        vb_add_vertex(vb, bx, by, bz, nx, ny, nz, tx + sx, ty + sy, c_white, 1)
+	        vb_add_vertex(vb, cx, cy, cz, nx, ny, nz, tx + sx, ty, c_white, 1)
+        
+	        ax = q_sph_x(u, v, radius)
+	        ay = q_sph_y(u, v, radius)
+	        az = q_sph_z(u, v, radius)
+	        bx = q_sph_x(u, v + vs, radius)
+	        by = q_sph_y(u, v + vs, radius)
+	        bz = q_sph_z(u, v + vs, radius)
+	        cx = q_sph_x(u + us, v + vs, radius)
+	        cy = q_sph_y(u + us, v + vs, radius)
+	        cz = q_sph_z(u + us, v + vs, radius)
+	        norm = q_normal_n(ax, ay, az, bx, by, bz, cx, cy, cz);
+	        nx = -norm[0]
+	        ny = -norm[1]
+	        nz = -norm[2]
+	        vb_add_vertex(vb, ax, ay, az, nx, ny, nz, tx, ty, c_white, 1)
+	        vb_add_vertex(vb, bx, by, bz, nx, ny, nz, tx, ty + sy, c_white, 1)
+	        vb_add_vertex(vb, cx, cy, cz, nx, ny, nz, tx + sx, ty + sy, c_white, 1)
+	    }
+	}
+}
+
 function vb_floor(x, y, w, d, z, hr, vr, freeze = true) {
 	var _floor = vb_create();
 	vb_begin(_floor)

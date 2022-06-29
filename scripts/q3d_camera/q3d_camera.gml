@@ -120,7 +120,7 @@ function q3D_cam_smooth(smooth) {
 #endregion
 
 #region camera set
-function q3D_cam_set(aspect, pass = cam_shader.pass) {
+function q3D_cam_set(aspect, add_z = 0, pass = cam_shader.pass) {
 	var cam = camera_get_active();
 	
 	self.q_temp_proj = camera_get_proj_mat(cam)
@@ -140,10 +140,10 @@ function q3D_cam_set(aspect, pass = cam_shader.pass) {
 		matrix_build_lookat(
 			self.x,
 			self.y,
-			self.z,
+			self.z + add_z,
 			self.x + self.q_xto_s,
 			self.y + self.q_yto_s,
-			self.z + self.q_zto_s,
+			self.z + self.q_zto_s + add_z,
 			self.q_xup,
 			self.q_yup,
 			self.q_zup

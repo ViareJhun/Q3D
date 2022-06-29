@@ -18,9 +18,9 @@ uniform float is_normal;
 
 vec3 unpack(float value) {
 	return vec3(
-		floor(value / 10000.0) / 100.0,
+		mod(value, 100.0) / 100.0,
 	    mod(floor(value / 100.0), 100.0) / 100.0,
-	    mod(value, 100.0) / 100.0
+	    floor(value / 10000.0) / 100.0
 	);
 }
 
@@ -38,10 +38,10 @@ void main()
 		vec3 light = vec3(0.0);
 		
 		// Global
+		vec3 global_color = unpack(global_light[4]);
+		
 		if (is_norm) {
 			// Prepare
-			vec3 global_color = unpack(global_light[4]);
-			
 			vec3 global_dir = -vec3(
 				global_light[1],
 				global_light[2],
@@ -65,6 +65,8 @@ void main()
 				pow(max(dot(view_dir, reflect_dir), 0.0), m_shininess) *
 				global_color * m_specular
 			) * global_light[0];
+		} else {
+			light += global_color * global_light[0];
 		}
 		
 		// Point

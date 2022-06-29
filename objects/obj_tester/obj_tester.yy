@@ -1,5 +1,8 @@
 {
-  "spriteId": null,
+  "spriteId": {
+    "name": "spr_hitbox_test",
+    "path": "sprites/spr_hitbox_test/spr_hitbox_test.yy",
+  },
   "solid": false,
   "visible": true,
   "managed": true,

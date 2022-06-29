@@ -23,22 +23,30 @@ debug = 0
 
 dith = false
 
-q3D_cam_init(16)
-q3D_cam_smooth(0.3)
+game_set_speed(60, gamespeed_fps)
+q3D_cam_init()
+q3D_cam_smooth(0.5)
+q3D_phys_init(3, 0.9, 14)
 q3D_view_set(512, 288, 2)
 
-mdl_block = vb_create()
-vb_begin(mdl_block)
-with obj_block_map {
-	vb_add_block(
-		obj_tester.mdl_block,
-		x - sprite_xoffset,
-		y - sprite_yoffset,
-		0,
-		16, 16, 16,
-		-1, -1
-	)
-}
-vb_end(mdl_block, true)
+light_colors = [c_lime, c_fuchsia, c_aqua, c_fuchsia]
+
+z_pitch = 0
+z_gravity = 0.15
+z_jump = 2.4
+
+water = 0
+
+block_compiled = false
+
+skybox = vb_create()
+vb_begin(skybox)
+vb_add_sphere(
+	skybox,
+	32, 4000
+)
+vb_end(skybox)
+vertex_freeze(skybox)
 
 application_surface_draw_enable(false)
+// window_set_fullscreen(true)

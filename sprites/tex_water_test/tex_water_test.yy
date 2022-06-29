@@ -8,14 +8,14 @@
   "collisionTolerance": 0,
   "swfPrecision": 2.525,
   "bbox_left": 0,
-  "bbox_right": 63,
+  "bbox_right": 127,
   "bbox_top": 0,
-  "bbox_bottom": 63,
+  "bbox_bottom": 127,
   "HTile": false,
   "VTile": false,
   "For3D": true,
-  "width": 64,
-  "height": 64,
+  "width": 128,
+  "height": 128,
   "textureGroupId": {
     "name": "Default",
     "path": "texturegroups/Default",
@@ -24,12 +24,12 @@
   "gridX": 0,
   "gridY": 0,
   "frames": [
-    {"compositeImage":{"FrameId":{"name":"ec84ccd6-bf76-4d62-856f-159895825689","path":"sprites/tex_block_test/tex_block_test.yy",},"LayerId":null,"resourceVersion":"1.0","name":"","tags":[],"resourceType":"GMSpriteBitmap",},"images":[
-        {"FrameId":{"name":"ec84ccd6-bf76-4d62-856f-159895825689","path":"sprites/tex_block_test/tex_block_test.yy",},"LayerId":{"name":"a2a06307-3d25-4a76-a7dd-2c6c5f0cf9eb","path":"sprites/tex_block_test/tex_block_test.yy",},"resourceVersion":"1.0","name":"","tags":[],"resourceType":"GMSpriteBitmap",},
-      ],"parent":{"name":"tex_block_test","path":"sprites/tex_block_test/tex_block_test.yy",},"resourceVersion":"1.0","name":"ec84ccd6-bf76-4d62-856f-159895825689","tags":[],"resourceType":"GMSpriteFrame",},
+    {"compositeImage":{"FrameId":{"name":"43eb8b62-5698-4719-9cde-ac8e2a2046f0","path":"sprites/tex_water_test/tex_water_test.yy",},"LayerId":null,"resourceVersion":"1.0","name":"","tags":[],"resourceType":"GMSpriteBitmap",},"images":[
+        {"FrameId":{"name":"43eb8b62-5698-4719-9cde-ac8e2a2046f0","path":"sprites/tex_water_test/tex_water_test.yy",},"LayerId":{"name":"ea964622-4366-4ebf-af0e-536c9627bb21","path":"sprites/tex_water_test/tex_water_test.yy",},"resourceVersion":"1.0","name":"","tags":[],"resourceType":"GMSpriteBitmap",},
+      ],"parent":{"name":"tex_water_test","path":"sprites/tex_water_test/tex_water_test.yy",},"resourceVersion":"1.0","name":"43eb8b62-5698-4719-9cde-ac8e2a2046f0","tags":[],"resourceType":"GMSpriteFrame",},
   ],
   "sequence": {
-    "spriteId": {"name":"tex_block_test","path":"sprites/tex_block_test/tex_block_test.yy",},
+    "spriteId": {"name":"tex_water_test","path":"sprites/tex_water_test/tex_water_test.yy",},
     "timeUnits": 1,
     "playback": 1,
     "playbackSpeed": 30.0,
@@ -41,7 +41,7 @@
     "moments": {"Keyframes":[],"resourceVersion":"1.0","resourceType":"KeyframeStore<MomentsEventKeyframe>",},
     "tracks": [
       {"name":"frames","spriteId":null,"keyframes":{"Keyframes":[
-            {"id":"52b9362e-602e-4ca5-8308-74e3f9508e5d","Key":0.0,"Length":1.0,"Stretch":false,"Disabled":false,"IsCreationKey":false,"Channels":{"0":{"Id":{"name":"ec84ccd6-bf76-4d62-856f-159895825689","path":"sprites/tex_block_test/tex_block_test.yy",},"resourceVersion":"1.0","resourceType":"SpriteFrameKeyframe",},},"resourceVersion":"1.0","resourceType":"Keyframe<SpriteFrameKeyframe>",},
+            {"id":"9711584c-d53a-4129-a284-79304418f287","Key":0.0,"Length":1.0,"Stretch":false,"Disabled":false,"IsCreationKey":false,"Channels":{"0":{"Id":{"name":"43eb8b62-5698-4719-9cde-ac8e2a2046f0","path":"sprites/tex_water_test/tex_water_test.yy",},"resourceVersion":"1.0","resourceType":"SpriteFrameKeyframe",},},"resourceVersion":"1.0","resourceType":"Keyframe<SpriteFrameKeyframe>",},
           ],"resourceVersion":"1.0","resourceType":"KeyframeStore<SpriteFrameKeyframe>",},"trackColour":0,"inheritsTrackColour":true,"builtinName":0,"traits":0,"interpolation":1,"tracks":[],"events":[],"isCreationTrack":false,"resourceVersion":"1.0","tags":[],"resourceType":"GMSpriteFramesTrack","modifiers":[],},
     ],
     "visibleRange": null,
@@ -58,14 +58,14 @@
     "yorigin": 0,
     "eventToFunction": {},
     "eventStubScript": null,
-    "parent": {"name":"tex_block_test","path":"sprites/tex_block_test/tex_block_test.yy",},
+    "parent": {"name":"tex_water_test","path":"sprites/tex_water_test/tex_water_test.yy",},
     "resourceVersion": "1.4",
-    "name": "tex_block_test",
+    "name": "tex_water_test",
     "tags": [],
     "resourceType": "GMSequence",
   },
   "layers": [
-    {"visible":true,"isLocked":false,"blendMode":0,"opacity":100.0,"displayName":"default","resourceVersion":"1.0","name":"a2a06307-3d25-4a76-a7dd-2c6c5f0cf9eb","tags":[],"resourceType":"GMImageLayer",},
+    {"visible":true,"isLocked":false,"blendMode":0,"opacity":100.0,"displayName":"default","resourceVersion":"1.0","name":"ea964622-4366-4ebf-af0e-536c9627bb21","tags":[],"resourceType":"GMImageLayer",},
   ],
   "nineSlice": null,
   "parent": {
@@ -73,7 +73,7 @@
     "path": "folders/Sprites/textures.yy",
   },
   "resourceVersion": "1.0",
-  "name": "tex_block_test",
+  "name": "tex_water_test",
   "tags": [],
   "resourceType": "GMSprite",
 }

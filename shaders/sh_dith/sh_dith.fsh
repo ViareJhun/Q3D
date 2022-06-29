@@ -1,7 +1,7 @@
 varying vec2 v_vTexcoord;
 varying vec4 v_vColour;
 
-const float color_factor = 12.0;
+const float color_factor = 10.0;
 const mat4 dither = mat4(
     -4.0, 0.0, -3.0, 1.0,
     2.0, -2.0, 3.0, -1.0,
