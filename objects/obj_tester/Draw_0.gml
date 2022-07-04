@@ -18,6 +18,8 @@ q3D_light_flash(
 
 q3D_cam_set(window_get_width() / window_get_height(), z_pitch, pass)
 gpu_set_texrepeat(true)
+q3D_set_quanted(true, 0.8)
+q3D_light_set_lmap(false)
 
 // Skybox
 q3D_light_normal(false)
@@ -30,21 +32,34 @@ vb_draw(
 )
 q3D_light_normal(true)
 
+q3D_light_set_lmap(true)
 // All draw
+ /*
+if is_pbr q3D_light_set_mat(test_material)
+vb_draw(
+	mdl_test,
+	qstex(tex_box_diffuse),
+	256, 256, 8,
+	// self.x + self.q_xto_s * 10,
+	// self.y + self.q_yto_s * 10,
+	// self.z + self.q_zto_s * 10,
+	current_time * 0.05,
+	current_time * 0.05,
+	current_time * 0.05
+)
+q3D_light_material_default()
+// */
+
+q3D_light_normal(false)
 vb_fdraw(
 	my_floor,
 	qstex(tex_floor_test)
 )
-
-q3D_light_normal(false)
-for (var i = 0; i < palms_count; i ++) {
-	bb_draw(
-		tex_billboard_test, 0,
-		palms[i][0], palms[i][1],
-		0,
-		64, 64
-	)
-}
+vb_draw(
+	my_floor,
+	qstex(tex_floor_test),
+	0, 0, 16
+)
 q3D_light_normal(true)
 
 q3D_light_set_mat(box_material)
@@ -54,15 +69,15 @@ vb_draw(
 )
 q3D_light_material_default()
 
-
 // Opacity
-draw_set_alpha(0)
+q3D_set_water(true)
+q3D_light_normal(false)
 vb_draw(
-	my_floor,
-	qstex(tex_water_test),
-	-water * 32, -water * 32, 2
+	mdl_water,
+	qstex(tex_water_test)
 )
-draw_set_alpha(1)
+q3D_light_normal(true)
+q3D_set_water(false)
 
 gpu_set_texrepeat(false)
 q3D_cam_reset()

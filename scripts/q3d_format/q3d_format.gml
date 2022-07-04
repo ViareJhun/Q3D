@@ -126,13 +126,15 @@ function vb_add_sphere(vb, steps, radius) {
 	        cx = q_sph_x(u + us, v, radius)
 	        cy = q_sph_y(u + us, v, radius)
 	        cz = q_sph_z(u + us, v, radius)
+			/*
 	        norm = q_normal_n(ax, ay, az, bx, by, bz, cx, cy, cz);
 	        nx = -norm[0]
 	        ny = -norm[1]
 	        nz = -norm[2]
-	        vb_add_vertex(vb, ax, ay, az, nx, ny, nz, tx, ty, c_white, 1)
-	        vb_add_vertex(vb, bx, by, bz, nx, ny, nz, tx + sx, ty + sy, c_white, 1)
-	        vb_add_vertex(vb, cx, cy, cz, nx, ny, nz, tx + sx, ty, c_white, 1)
+			*/
+	        vb_add_vertex(vb, ax, ay, az, ax / radius, ay / radius, az / radius, tx, ty, c_white, 1)
+	        vb_add_vertex(vb, bx, by, bz, bx / radius, by / radius, bz / radius, tx + sx, ty + sy, c_white, 1)
+	        vb_add_vertex(vb, cx, cy, cz, cx / radius, cy / radius, cz / radius, tx + sx, ty, c_white, 1)
         
 	        ax = q_sph_x(u, v, radius)
 	        ay = q_sph_y(u, v, radius)
@@ -147,9 +149,9 @@ function vb_add_sphere(vb, steps, radius) {
 	        nx = -norm[0]
 	        ny = -norm[1]
 	        nz = -norm[2]
-	        vb_add_vertex(vb, ax, ay, az, nx, ny, nz, tx, ty, c_white, 1)
-	        vb_add_vertex(vb, bx, by, bz, nx, ny, nz, tx, ty + sy, c_white, 1)
-	        vb_add_vertex(vb, cx, cy, cz, nx, ny, nz, tx + sx, ty + sy, c_white, 1)
+	        vb_add_vertex(vb, ax, ay, az, ax / radius, ay / radius, az / radius, tx, ty, c_white, 1)
+	        vb_add_vertex(vb, bx, by, bz, bx / radius, by / radius, bz / radius, tx, ty + sy, c_white, 1)
+	        vb_add_vertex(vb, cx, cy, cz, cx / radius, cy / radius, cz / radius, tx + sx, ty + sy, c_white, 1)
 	    }
 	}
 }
@@ -188,6 +190,12 @@ function vb_billboard(_x, _y, w, d, z, hr, vr, freeze = true, xoffset = 0, yoffs
 	if freeze vertex_freeze(bb)
 	
 	return bb
+}
+#endregion
+
+#region models
+function q3D_load_model() {
+	
 }
 #endregion
 

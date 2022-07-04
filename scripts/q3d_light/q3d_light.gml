@@ -63,24 +63,86 @@ function q3D_light_normal(normal) {
 	qsh_f(global.light_forward, "is_normal", normal)
 }
 
-function q3D_light_material(ambient, diffuse, shininess, specular) {
+function q3D_light_material(ambient, diffuse, shininess, specular, roughness, roug) {
 	qsh_f(global.light_forward, "m_ambient", ambient)
 	qsh_f(global.light_forward, "m_diffuse", diffuse)
 	qsh_f(global.light_forward, "m_shininess", shininess)
 	qsh_s(global.light_forward, "m_specular", specular)
+	qsh_s(global.light_forward, "m_roughness", roughness)
+	qsh_f(global.light_forward, "m_rough", roug)
+	qsh_fa(global.light_forward, "texel", [
+		1 / texture_get_width(roughness),
+		1 / texture_get_height(roughness)
+		]
+	)
 }
 
 function q3D_light_material_default() {
 	qsh_f(global.light_forward, "m_ambient", global.light_ambient_default)
 	qsh_f(global.light_forward, "m_diffuse", 1.0)
 	qsh_f(global.light_forward, "m_shininess", 16.0)
-	qsh_s(global.light_forward, "m_specular", tex_q3D_spec)
+	qsh_s(global.light_forward, "m_specular", qstex(tex_q3D_spec))
+	qsh_s(global.light_forward, "m_roughness", qstex(tex_q3D_roug))
+	qsh_f(global.light_forward, "m_rough", 0.0)
+	qsh_fa(global.light_forward, "texel", [
+		1 / texture_get_width(qstex(tex_q3D_spec)),
+		1 / texture_get_height(qstex(tex_q3D_spec))
+		]
+	)
 }
 
 function q3D_light_set_mat(material) {
 	q3D_light_material(
-		material[0], material[1], material[2], material[3]
+		material[0], material[1], material[2], material[3], material[4], material[5]
 	)
+}
+
+function q3D_light_set_lmap(enable) {
+	qsh_f(global.light_forward, "is_lmap", enable)
+}
+#endregion
+
+#region light map
+function q3D_lmap_process(light, destroy = true) {
+	var surf = surface_create(
+		room_width,
+		room_height
+	);
+	
+	surface_set_target(surf)
+	draw_clear_alpha(c_black, 0)
+	
+	with light {
+		draw_self()
+		
+		if destroy {
+			instance_destroy()
+		}
+	}
+	
+	surface_reset_target()
+	
+	if !variable_global_exists("g_light_map") {
+		global.g_light_map = undefined
+	}
+	
+	if !is_undefined(global.g_light_map) {
+		if sprite_exists(global.g_light_map) {
+			sprite_delete(global.g_light_map)
+		}
+	}
+	
+	global.g_light_map = sprite_create_from_surface(
+		surf,
+		0, 0,
+		room_width,
+		room_height,
+		false,
+		false,
+		0, 0
+	)
+	
+	surface_free(surf)
 }
 #endregion
 
@@ -97,6 +159,11 @@ function q3D_light_set(vx, vy, vz) {
 	
 	q3D_light_shading(true)
 	q3D_light_normal(true)
+	q3D_light_set_lmap(false)
+	if variable_global_exists("g_light_map") {
+		qsh_s(global.light_forward, "light_map", global.g_light_map)
+	}
+	qsh_fa(global.light_forward, "map_size", [room_width, room_height])
 }
 
 function q3D_light_reset() {

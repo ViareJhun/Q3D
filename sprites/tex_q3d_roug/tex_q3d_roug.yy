@@ -24,12 +24,12 @@
   "gridX": 0,
   "gridY": 0,
   "frames": [
-    {"compositeImage":{"FrameId":{"name":"ec84ccd6-bf76-4d62-856f-159895825689","path":"sprites/tex_block_test/tex_block_test.yy",},"LayerId":null,"resourceVersion":"1.0","name":"","tags":[],"resourceType":"GMSpriteBitmap",},"images":[
-        {"FrameId":{"name":"ec84ccd6-bf76-4d62-856f-159895825689","path":"sprites/tex_block_test/tex_block_test.yy",},"LayerId":{"name":"32f5e2c5-bd6f-46fe-b438-343d00e999a9","path":"sprites/tex_block_test/tex_block_test.yy",},"resourceVersion":"1.0","name":"","tags":[],"resourceType":"GMSpriteBitmap",},
-      ],"parent":{"name":"tex_block_test","path":"sprites/tex_block_test/tex_block_test.yy",},"resourceVersion":"1.0","name":"ec84ccd6-bf76-4d62-856f-159895825689","tags":[],"resourceType":"GMSpriteFrame",},
+    {"compositeImage":{"FrameId":{"name":"9da81e99-fd42-468e-8391-1bbf172bd10a","path":"sprites/tex_q3D_roug/tex_q3D_roug.yy",},"LayerId":null,"resourceVersion":"1.0","name":"","tags":[],"resourceType":"GMSpriteBitmap",},"images":[
+        {"FrameId":{"name":"9da81e99-fd42-468e-8391-1bbf172bd10a","path":"sprites/tex_q3D_roug/tex_q3D_roug.yy",},"LayerId":{"name":"8626d83b-22aa-45c9-b729-ce76d7b0404d","path":"sprites/tex_q3D_roug/tex_q3D_roug.yy",},"resourceVersion":"1.0","name":"","tags":[],"resourceType":"GMSpriteBitmap",},
+      ],"parent":{"name":"tex_q3D_roug","path":"sprites/tex_q3D_roug/tex_q3D_roug.yy",},"resourceVersion":"1.0","name":"9da81e99-fd42-468e-8391-1bbf172bd10a","tags":[],"resourceType":"GMSpriteFrame",},
   ],
   "sequence": {
-    "spriteId": {"name":"tex_block_test","path":"sprites/tex_block_test/tex_block_test.yy",},
+    "spriteId": {"name":"tex_q3D_roug","path":"sprites/tex_q3D_roug/tex_q3D_roug.yy",},
     "timeUnits": 1,
     "playback": 1,
     "playbackSpeed": 30.0,
@@ -41,7 +41,7 @@
     "moments": {"Keyframes":[],"resourceVersion":"1.0","resourceType":"KeyframeStore<MomentsEventKeyframe>",},
     "tracks": [
       {"name":"frames","spriteId":null,"keyframes":{"Keyframes":[
-            {"id":"52b9362e-602e-4ca5-8308-74e3f9508e5d","Key":0.0,"Length":1.0,"Stretch":false,"Disabled":false,"IsCreationKey":false,"Channels":{"0":{"Id":{"name":"ec84ccd6-bf76-4d62-856f-159895825689","path":"sprites/tex_block_test/tex_block_test.yy",},"resourceVersion":"1.0","resourceType":"SpriteFrameKeyframe",},},"resourceVersion":"1.0","resourceType":"Keyframe<SpriteFrameKeyframe>",},
+            {"id":"63309cfb-20f8-4e55-aac6-5504aa571728","Key":0.0,"Length":1.0,"Stretch":false,"Disabled":false,"IsCreationKey":false,"Channels":{"0":{"Id":{"name":"9da81e99-fd42-468e-8391-1bbf172bd10a","path":"sprites/tex_q3D_roug/tex_q3D_roug.yy",},"resourceVersion":"1.0","resourceType":"SpriteFrameKeyframe",},},"resourceVersion":"1.0","resourceType":"Keyframe<SpriteFrameKeyframe>",},
           ],"resourceVersion":"1.0","resourceType":"KeyframeStore<SpriteFrameKeyframe>",},"trackColour":0,"inheritsTrackColour":true,"builtinName":0,"traits":0,"interpolation":1,"tracks":[],"events":[],"isCreationTrack":false,"resourceVersion":"1.0","tags":[],"resourceType":"GMSpriteFramesTrack","modifiers":[],},
     ],
     "visibleRange": null,
@@ -58,22 +58,22 @@
     "yorigin": 0,
     "eventToFunction": {},
     "eventStubScript": null,
-    "parent": {"name":"tex_block_test","path":"sprites/tex_block_test/tex_block_test.yy",},
+    "parent": {"name":"tex_q3D_roug","path":"sprites/tex_q3D_roug/tex_q3D_roug.yy",},
     "resourceVersion": "1.4",
-    "name": "tex_block_test",
+    "name": "tex_q3D_roug",
     "tags": [],
     "resourceType": "GMSequence",
   },
   "layers": [
-    {"visible":true,"isLocked":false,"blendMode":0,"opacity":100.0,"displayName":"Layer 1","resourceVersion":"1.0","name":"32f5e2c5-bd6f-46fe-b438-343d00e999a9","tags":[],"resourceType":"GMImageLayer",},
+    {"visible":true,"isLocked":false,"blendMode":0,"opacity":100.0,"displayName":"default","resourceVersion":"1.0","name":"8626d83b-22aa-45c9-b729-ce76d7b0404d","tags":[],"resourceType":"GMImageLayer",},
   ],
   "nineSlice": null,
   "parent": {
-    "name": "textures",
-    "path": "folders/Sprites/textures.yy",
+    "name": "q3D",
+    "path": "folders/Sprites/q3D.yy",
   },
   "resourceVersion": "1.0",
-  "name": "tex_block_test",
+  "name": "tex_q3D_roug",
   "tags": [],
   "resourceType": "GMSprite",
 }

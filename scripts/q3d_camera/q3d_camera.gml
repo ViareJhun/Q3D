@@ -170,6 +170,8 @@ function q3D_cam_set(aspect, add_z = 0, pass = cam_shader.pass) {
 		break
 	}
 	q3D_set_quanted(false)
+	q3D_set_water(false)
+	qsh_f(global.pass_shader, "time", current_time * 0.001)
 	
 	self.q_pass = pass
 }
@@ -201,7 +203,7 @@ function q3D_cam_reset() {
 #endregion
 
 #region other
-function q3D_view_set(w, h, scale = 1) {
+function q3D_view_set(w, h, scale = 1, app_port = true) {
 	view_enabled = true
 	view_visible[0] = true
 	var cam = camera_get_active();
@@ -211,11 +213,19 @@ function q3D_view_set(w, h, scale = 1) {
 	view_wport[0] = w * scale
 	view_hport[0] = h * scale
 	
-	surface_resize(
-		application_surface,
-		view_wport[0],
-		view_hport[0]
-	)
+	if app_port {
+		surface_resize(
+			application_surface,
+			view_wport[0],
+			view_hport[0]
+		)
+	} else {
+		surface_resize(
+			application_surface,
+			w,
+			h
+		)
+	}
 	
 	if !window_get_fullscreen() {
 		window_set_size(
@@ -228,5 +238,9 @@ function q3D_view_set(w, h, scale = 1) {
 function q3D_set_quanted(enable, quant = 1.0) {
 	qsh_f(global.pass_shader, "is_quanted", enable)
 	qsh_f(global.pass_shader, "vertex_quant", quant)
+}
+
+function q3D_set_water(enable) {
+	qsh_f(global.pass_shader, "is_water", enable)
 }
 #endregion

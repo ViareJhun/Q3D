@@ -93,4 +93,5 @@ gp = lerp(gp, ge * 0.4, 0.1)
 
 if keyboard_check_pressed(vk_f1) debug = !debug
 if keyboard_check_pressed(ord("C")) dith = !dith
+if keyboard_check_pressed(ord("V")) is_pbr = !is_pbr
 if keyboard_check_pressed(vk_escape) game_end()

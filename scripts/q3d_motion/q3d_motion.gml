@@ -39,11 +39,16 @@ function q3D_phys_endstep(obj, z_factor = false, z_norm = false) {
 		sqr(self.q_speed[1]) +
 		sqr(self.q_speed[2])
 	);
-	l = clamp(l, 1, self.q_speed_max)
+	l = max(l, 1)
 	
 	self.q_speed[0] /= l
 	self.q_speed[1] /= l
 	if z_norm self.q_speed[2] /= l
+	
+	l = min(l, self.q_speed_max)
+	self.q_speed[0] *= l
+	self.q_speed[1] *= l
+	if z_norm self.q_speed[2] *= l
 	
 	// Collisions
 	if q3D_phys_collision(self.q_speed[0], 0, 0, obj) self.q_speed[0] = 0
